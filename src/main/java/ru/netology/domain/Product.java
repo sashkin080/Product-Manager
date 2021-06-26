@@ -3,6 +3,8 @@ package ru.netology.domain;
 import ru.netology.manager.ProductManager;
 import ru.netology.repository.ProductRepository;
 
+import java.util.Objects;
+
 public class Product {
 
     private int id;
@@ -46,7 +48,28 @@ public class Product {
         return name.contains(search);
     }
 
-    ProductRepository repo = new ProductRepository();
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                '}';
+    }
 
-    ProductManager Manager = new ProductManager(repo);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id && cost == product.cost && Objects.equals(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, cost);
+    }
+
+   // ProductRepository repo = new ProductRepository();
+
 }
