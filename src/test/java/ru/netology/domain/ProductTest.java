@@ -17,4 +17,10 @@ class ProductTest {
         assertEquals(false, product.matches("Белоснежка"));
     }
 
+    @Test
+    public void shouldUseEquals() {
+        Product first = new Product(1, "Муму", 999);
+        Product second = new Product(1, "Муму", 999);
+        assertEquals(first,second);
+    }
 }

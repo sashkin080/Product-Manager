@@ -7,18 +7,15 @@ import ru.netology.repository.ProductRepository;
 
 public class ProductManager {
 
-    private ProductRepository repository;
+    private ProductRepository repository = new ProductRepository();
 
-    public ProductManager(ProductRepository repo) {
-        repository = repo;
-    }
 
     public void add(Product product) {
         repository.save(product);
     }
 
 
-    public Product[] searcyBy(String text) {
+    public Product[] searchBy(String text) {
         Product[] result = new Product[0];
         for (Product product : repository.findAll()) {
             if (matches(product, text)) {
@@ -45,12 +42,13 @@ public class ProductManager {
         }
         if (product instanceof Smartphone) {
             Smartphone smartphone = (Smartphone) product;
-            if (smartphone.getManufacturer().contains(search)) {
+            if (((Smartphone) product).getManufacturer().contains(search)) {
                 return true;
             }
             if (product.getName().contains(search)) {
                 return true;
             }
+            return false;
         }
         return false;
     }
